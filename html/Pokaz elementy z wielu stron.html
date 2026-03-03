@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dane z wielu stron</title>
+</head>
+<body>
+    <h2>Dane z wielu stron:</h2>
+    <!-- Miejsce, w którym pojawi się załadowana treść -->
+    <div id="content-container">Ładowanie...</div>
+    <script>
+        const pages = [
+            {
+                url: 'https://www.aliorbank.pl/', // URL strony zewnętrznej
+                selector: '.hero-carousel-slide-title' // Selektor CSS elementu, który chcesz pobrać (np. id: #element, class: .element)
+            },
+            {
+                url: 'https://www.grzegorzmeble.pl/',
+                selector: '.hero-title'
+            }
+        ];
+
+        const container = document.getElementById('content-container');
+        container.innerHTML = 'Ładowanie...';
+
+        Promise.all(
+            pages.map(page =>
+                fetch(page.url)
+                    .then(res => res.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const element = doc.querySelector(page.selector);
+
+                        return element
+                            ? `<div><h3>${page.url}</h3>${element.innerHTML}</div>`
+                            : `<div><h3>${page.url}</h3>Nie znaleziono elementu</div>`;
+                    })
+                    .catch(() => `<div><h3>${page.url}</h3>Błąd ładowania</div>`)
+            )
+        )
+            .then(results => {
+                container.innerHTML = results.join('');
+            });
+    </script>
+</body>
+</html>
