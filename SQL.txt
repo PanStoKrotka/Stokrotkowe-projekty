@@ -1,0 +1,26 @@
+SELECT ROUND(AVG(cena), 2) AS Srednio_abonament FROM abonamenty; - liczenie średniej ceny z zaokrągleniem do 2 miejsc po przecinku i nadanie nazwy kolumnie (aliasowi na Srednio_abonament)
+
+SELECT nazwa, opis FROM abonamenty WHERE opis LIKE '%zdrowie%' OR opis LIKE '%opieką%'; - Wybiera nazwa i opis abonamentu tylko te, gdzie opis ma w dowolnym miejscu słowo zdrowie albo opieką.
+
+SELECT abonamenty.nazwa, cechy.cecha
+FROM abonamenty
+JOIN szczegolyabonamentu
+    ON abonamenty.id = szczegolyabonamentu.Abonamenty_id
+JOIN cechy
+    ON szczegolyabonamentu.Cechy_id = cechy.id
+WHERE abonamenty.id = 1; - do relacji n:m (wiele do wielu). Wybierające jedynie nazwę abonamentu i odpowiadającą mu cechę dla abonamentu o id równym 1.
+
+ROUND(kolumna, liczba_cyfr_po_przecinku) - zaokrąglenie
+AVG(kolumna) - liczenie średniej liczb
+AS - nadanie nazwy kolumnie (aliasowi)
+opis LIKE - LIKE służy do sprawdzania czy gdzieś w kolumnie opis znajduje się opis z podanym słowem
+ORDER BY RAND() - wybiera losowo
+LIMIT 1 - wybiera tylko jeden element
+ORDER BY Cechy_id ASC / DESC - ASC układa rosnąco a DESC malejąco
+DISTINCT - wyświetlanie wierszy bez duplikatów
+
+SELECT Abonamenty_id FROM szczegolyabonamentu ORDER BY RAND() LIMIT 1; - wybiera 1 losowy rekord z tabeli szczegolyabonamentu z kolumny Abonamenty_id
+
+SELECT Cechy_id FROM szczegolyabonamentu ORDER BY Cechy_id ASC LIMIT 10; - wybiera 10 elementów układając je rosnąco
+
+SELECT DISTINCT NazwaProduktu FROM Produkty;
