@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Kahoot PIN Checker</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sprawdź PIN Kahoot</h1>
+    <input id="pin" placeholder="Wpisz PIN">
+    <button onclick="checkPin()">Sprawdź</button>
+    <div id="result"></div>
+    <script>
+        async function checkPin() {
+            const pin = document.getElementById("pin").value
+            const url = "https://kahoot.it/reserve/session/" + pin
+            try {
+                const res = await fetch("https://corsproxy.io/?" + encodeURIComponent(url))
+                if (res.status === 200) {
+                    const data = await res.json()
+                    // document.getElementById("result").innerHTML = "✅ PIN istnieje<br>Nazwa quizu: " + data.name
+                    document.getElementById("result").innerHTML = "✅ PIN istnieje"
+                } 
+                else {
+                    document.getElementById("result").innerHTML = "❌ PIN nie istnieje"
+                }
+            } 
+            catch (e) {
+                document.getElementById("result").innerHTML = "⚠️ Błąd sprawdzania"
+            }
+        }
+    </script>
+</body>
+</html>
