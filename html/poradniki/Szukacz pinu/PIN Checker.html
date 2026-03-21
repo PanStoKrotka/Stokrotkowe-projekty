@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PIN Checker</title>
+    <link rel="stylesheet" href="PIN Checker.css">
+    <script src="PIN Chcker.js"></script>
+</head>
+<body>
+    <nav class="pasek">
+        <a href="#kahoot" onclick="showSection('kahoot')">Kahoot</a>
+        <a href="#quizizz" onclick="showSection('quizizz')">Quizizz (Wayground)</a>
+    </nav>
+    <section id="kahoot" class="kahoot">
+        <fieldset>
+            <legend>Aktywne piny</legend>
+            <p id="activePinsK"></p>
+        </fieldset>
+        <section class="SprawdzPinKahoot">
+            <h1>Sprawdź PIN Kahoot</h1>
+            <input id="pinPojK" placeholder="Wpisz PIN"><br>
+            <button onclick="checkPinK()">Szukaj aktywnych pinów</button>
+            <button onclick="checkPinPojK()">Sprawdź czy pin działa</button><br>
+            <div id="resultK"></div>
+        </section>
+    </section>
+    <section id="quizizz" class="hidden quizizz">
+        <fieldset>
+            <legend>Aktywne piny</legend>
+            <p id="activePinsQ"></p>
+        </fieldset>
+        <section class="SprawdzPinQuizizz">
+            <h1>Sprawdź PIN Wayground (Quizizz)</h1>
+            <input id="pinPojQ" placeholder="Wpisz PIN"><br>
+            <button onclick="checkPinQ()">Szukaj aktywnych pinów</button>
+            <button onclick="checkPinPojQ()">Sprawdź czy pin działa</button><br>
+            <div id="resultQ"></div>
+        </section>
+    </section>
+</body>
+</html>
