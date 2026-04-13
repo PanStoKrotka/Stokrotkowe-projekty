@@ -1,5 +1,5 @@
-# UWAGA! Przed użyciem programu trzeba zainstalować rozszeżenie stdnum.pl poleceniem w terminalu: pip install python-stdnum
-# UWAGA! Zawartosć pliku z peselami musi zawierać tylko i wyłącznie numery pesel ułożone jeden pod drugim!
+# UWAGA! Przed użyciem programu trzeba zainstalować rozszerzenie stdnum.pl poleceniem w terminalu: pip install python-stdnum
+# UWAGA! Plik z peselami musi zawierać tylko i wyłącznie numery pesel ułożone jeden pod drugim!
 from stdnum.pl import pesel
 
 with open("Python/demofile.txt") as f:  #Tu dać odpowiednią nazwe pliku / ścieżkę do pliku
