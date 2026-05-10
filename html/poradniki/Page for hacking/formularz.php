@@ -65,7 +65,7 @@
   <h2 id="form-title">Logowanie</h2>
   <form action="" method="post"></form>
   <!-- Formularz logowania -->
-  <form id="login-form" method="POST" class="active" action="formularz.php">
+  <form id="login-form" method="GET" class="active" action="formularz.php">
     <input type="text" name="login" placeholder="Login"/>
     <input type="password" name="password" id="password" placeholder="Hasło"/>
     <label style="display: block; margin: 3px 0;">
@@ -77,10 +77,10 @@
     <?php 
     session_start();
     $conn = mysqli_connect("localhost", "root", "", "formularz");
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['login'])) {
       // mysqli_report(MYSQLI_REPORT_OFF);
-      $login = $_POST['login'];
-      $haslo = $_POST['password'];
+      $login = $_GET['login'];
+      $haslo = $_GET['password'];
       $zap = "SELECT id_u FROM users WHERE login = '$login' AND password = '$haslo'";
       $result = mysqli_query($conn, $zap);
       
