@@ -73,7 +73,6 @@
     Pokaż hasło
     </label>
     <button type="submit">Zaloguj się</button>
-    <p id="komunikat" style="color: red;"></p>
     <?php 
     session_start();
     $conn = mysqli_connect("localhost", "root", "", "formularz");
@@ -85,13 +84,13 @@
       $result = mysqli_query($conn, $zap);
       
       if (mysqli_num_rows($result) > 0) {
-        echo "Zalogowano pomyślnie!";
+        echo "<p id='komunikat' style='color: green;'>Zalogowano pomyślnie!</p>";
         $_SESSION['user'] = $login;
         header("Location: panel.php");
         exit();
       } 
       else {
-        echo "Błędny login lub hasło.";
+        echo "<p id='komunikat' style='color: red;'>Błędny login lub hasło.</p>";
       }
     }
     ?>
