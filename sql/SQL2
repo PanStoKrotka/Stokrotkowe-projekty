@@ -1,0 +1,37 @@
+Aby nie wpisywać cały czas tego samego polecenia w MySQL (np. w konsoli XAMPP), możesz użyć aliasów (skrótów), zmiennych lub procedur składowanych, w zależności od tego, jakiego rodzaju jest to polecenie.
+Oto najprostsze i najskuteczniejsze sposoby:
+
+1. Tworzenie procedury (Stored Procedure) – Najlepsze dla zapytań SQL
+Jeśli Twoje polecenie to zapytanie SQL (np. długi SELECT łączący wiele tabel), możesz zapisać je jako procedurę w bazie danych.
+Jak to zrobić:
+
+DELIMITER //
+CREATE PROCEDURE MojePolecenie()
+BEGIN
+    SELECT * FROM nazwa_tabeli WHERE status = 'aktywny'; -- Tutaj wpisz swoje polecenie
+END //
+DELIMITER ;
+
+Jak tego używać: Wystarczy wpisać poniższą krótką komendę:
+
+CALL MojePolecenie();
+
+2. Tworzenie widoku (View) – Dla powtarzających się zapytań SELECT
+Jeśli stale wpisujesz to samo zapytanie wyświetlające dane, stwórz z niego wirtualną tabelę.
+Jak to zrobić:
+
+CREATE VIEW widok_skrot AS 
+SELECT kolumna1, kolumna2 FROM tabela WHERE warunek = 1;
+
+Jak tego używać:
+
+SELECT * FROM widok_skrot;
+
+3. Zmienne użytkownika – Dla pojedynczych wartości
+Jeśli ciągle wpisujesz tę samą wartość (np. długi tekst lub ID) w różnych zapytaniach, przypisz ją do zmiennej.
+Jak to zrobić i używać:
+
+SET @moj_skrot = 'BardzoDługiTekstKtoregoNieChceWpisywac';
+
+-- Użycie:
+SELECT * FROM tabela WHERE kolumna = @moj_skrot;
